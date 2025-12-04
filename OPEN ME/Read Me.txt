@@ -1,0 +1,14 @@
+1. Connection
+-Kung anong wifi nakaconnect kay arduino, yung din dapat ang wifi mo nakaconnect sa pc/laptop mo
+
+-Enable mo yung Apache HTTP Server & arduino ide.exe (under inbound rules from firewall) both private and public.
+or disable mo nalang firewall mo kung matapang ka
+
+2. Arduino Code
+Babaguhin mo lang is the from line 5 to 7 which is
+
+const char* ssid =
+const char* password =
+const char* serverURL =
+
+about sa IPV4 Address mahahanap mo sya sa cmd, type mo lang ipconfig then under ng Wifi Adapter

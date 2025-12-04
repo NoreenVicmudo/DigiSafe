@@ -1,0 +1,125 @@
+#include <SoftwareSerial.h>
+#include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
+
+const char* ssid = "Wifi name";
+const char* password = "Password ng wifi mo";
+const char* serverURL = "http://"IPv4 Address mo"/DigiSafe/scan_qr.php";
+
+#define QR_RX_PIN 14     // D5 (RX from QR scanner TX)
+#define QR_TX_PIN 12     // D6 (not used)
+#define LED_PIN 2        // Built-in LED
+#define RELAY_PIN 13      // D2 (solenoid relay control)
+
+SoftwareSerial qrSerial(QR_RX_PIN, QR_TX_PIN); // RX, TX
+
+String qrData = "";
+
+void setup() {
+  Serial.begin(9600);
+  qrSerial.begin(9600);
+
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(RELAY_PIN, OUTPUT);
+  digitalWrite(RELAY_PIN, HIGH); // Relay off
+
+  connectToWiFi();
+
+  Serial.println("System ready: Scanning QR and checking with server.");
+}
+
+void loop() {
+  while (qrSerial.available()) {
+    char c = qrSerial.read();
+    if (c == '\n' || c == '\r') {
+      if (qrData.length() > 0) {
+        qrData.trim();
+        handleQR(qrData);
+        qrData = "";
+        delay(500);
+      }
+    } else {
+      qrData += c;
+    }
+  }
+}
+
+void connectToWiFi() {
+  WiFi.begin(ssid, password);
+  Serial.print("ESP IP Address: ");
+  
+  int retry = 0;
+  while (WiFi.status() != WL_CONNECTED && retry < 20) {
+    delay(500);
+    Serial.print(".");
+    retry++;
+  }
+
+  if (WiFi.status() == WL_CONNECTED) {
+    Serial.println("\nWi-Fi connected!");
+    Serial.println("ESP IP Address: ");
+    Serial.println(WiFi.localIP());
+  } else {
+    Serial.println("\nWi-Fi connection failed.");
+  }
+}
+
+void handleQR(String code) {
+  Serial.println("------ QR SCAN START ------");
+  Serial.print("Scanned QR Code: ");
+  Serial.println(code);
+
+  if (WiFi.status() == WL_CONNECTED) {
+    WiFiClient client;
+    HTTPClient http;
+
+    Serial.print("Connecting to server: ");
+    Serial.println(serverURL);
+    
+    http.begin(client, serverURL);
+    http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+
+
+    String postData = "qrInput=" + code;
+    Serial.print("Sending data: ");
+    Serial.println(postData);
+
+    int httpCode = http.POST(postData);
+    Serial.print("HTTP status code: ");
+    Serial.println(httpCode);
+
+    if (httpCode > 0) {
+      String response = http.getString();
+      Serial.print("Server response: ");
+      Serial.println(response);
+
+      if (response == "valid") {
+        unlockDoor();
+      } else {
+        Serial.println("Access Denied. QR code invalid or expired.");
+        digitalWrite(LED_PIN, HIGH);
+        delay(10000);
+        digitalWrite(LED_PIN, LOW);
+      }
+    } else {
+      Serial.println("HTTP Request Failed: Could not reach the PHP server.");
+    }
+
+    http.end();
+  } else {
+    Serial.println("Wi-Fi not connected. Cannot send data to server.");
+  }
+  Serial.println("------ QR SCAN END --------");
+}
+
+
+
+void unlockDoor() {
+  digitalWrite(RELAY_PIN, LOW); // Unlock
+  Serial.println("Access Granted: Door Unlocked");
+
+  delay(10000); // Open for 5 seconds
+
+  digitalWrite(RELAY_PIN, HIGH); // Lock again
+  Serial.println("Door Locked");
+}

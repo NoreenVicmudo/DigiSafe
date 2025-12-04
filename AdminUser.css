@@ -1,0 +1,881 @@
+* {
+    font-family: 'Montserrat', 'Sans-serif';
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #4f46e5;
+    --secondary: #968ab6;
+    --light: #fbf8ff;
+    --dark: #1d1a27;
+}
+
+/* Dark gradient background animation */
+body {
+    background: linear-gradient(45deg, #0f0f17, #1a1a2e, #252538, #0f0f17);
+    background-size: 300% 300%;
+    animation: gradientMove 12s ease infinite;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Subtle animated gradient effect */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.bg-color {
+    flex: 1;
+}
+
+/* Overlay for dynamic lighting */
+.bg-color::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+    z-index: -1;
+}
+
+.header {
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Table Wrapper */
+.table-container {
+    display: block;
+    width: 100%;
+    height: 250px;
+    overflow-x: auto; /* Enables horizontal scrolling */
+    overflow-y: auto;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Table Styling */
+.table {
+    min-width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.table th, .table td {
+    padding: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-bottom: 1px solid var(--secondary);
+    text-align: center;
+}
+
+/* Header Styling */
+.table th {
+    background: var(--primary);
+    color: var(--light);
+    font-weight: 600;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+/* Row Colors */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: var(--light);
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+    background-color: var(--secondary);
+    color: var(--light);
+}
+
+/* Hover Effect */
+.table tbody tr:hover {
+    background-color: var(--primary);
+    color: var(--light);
+    transition: 0.3s;
+}
+
+/* Minimalist Scrollbar */
+.table-container::-webkit-scrollbar {
+    height: 6px; /* Thin scrollbar */
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: transparent; /* Invisible track */
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: rgba(100, 100, 100, 0.5); /* Subtle thumb color */
+    border-radius: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 100, 100, 0.8); /* Slightly darker on hover */
+}
+
+/* Styled Edit Button */
+.edit-btn {
+    background: var(--primary); /* Main accent color */
+    color: var(--light); /* Light text for contrast */
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 2px 6px rgba(79, 70, 229, 0.3); /* Soft shadow */
+}
+
+/* Hover Effect */
+.edit-btn:hover {
+    background: #3a35b3; /* Darker shade of primary */
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.5);
+    transform: scale(1.05); /* Slightly enlarges */
+}
+
+/* Active/Pressed Effect */
+.edit-btn:active {
+    background: #2c288f;
+    transform: scale(0.98); /* Slightly compresses */
+}
+
+/* Center Button in Table */
+.table td .edit-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+/* Styled Delete Button */
+.delete-btn {
+    background: #d32f2f; /* Reddish primary color */
+    color: white; /* White text for strong contrast */
+    border: none;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 3px 8px rgba(179, 0, 0, 0.4); /* Slight red glow */
+}
+
+/* Hover Effect */
+.delete-btn:hover {
+    background: #b71c1c; /* Darker red for hover */
+    box-shadow: 0 5px 12px rgba(138, 0, 0, 0.5);
+    transform: scale(1.06);
+}
+
+/* Active/Pressed Effect */
+.delete-btn:active {
+    background: #a31212; /* Even darker red */
+    transform: scale(0.95);
+    box-shadow: 0 2px 6px rgba(90, 2, 2, 0.6);
+}
+
+/* Center Button in Table */
+.table td .delete-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+/* DigiSafe Logo - Bold Gradient & Neon Effect */
+.logo {
+    font-size: 40px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-align: center;
+    display: inline-block;
+    letter-spacing: 3px;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Gradient animation on each letter */
+.logo span {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--light));
+    background-size: 400% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 3s infinite linear;
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Slight glowing shadow for better visibility */
+.logo::after {
+    content: "DigiSafe";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    color: var(--dark);
+   
+}
+
+/* Hover effect - letters shift slightly */
+.logo span:hover {
+    transform: translateY(-5px) rotate(5deg);
+}
+
+/* Gradient animation movement */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* MENU */
+.menu-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    flex-wrap: nowrap; /* Prevents wrapping */
+    overflow: hidden;  /* Hide overflow content instead of wrapping */
+    min-width: 0; /* Allows flex items to shrink properly */
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row; /* hmm*/
+    align-items: center;
+    min-width: fit-content;
+    flex-wrap: nowrap;
+}
+
+li {
+    float: left;
+    margin-right: 20px; /* Space between menu items */
+}
+
+li a{
+    display: inline-block;
+    position: relative;
+    color: var(--light);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease-in-out;
+}
+
+li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 5px;
+    width: 0;
+    height: 2px;
+    background-color: var(--light);
+    transition: width 0.3s ease-in-out;
+}
+
+li a:hover {
+    color: gray;
+}
+
+/* Underline expands from left on hover */
+li a:hover::after {
+    width: 100%;
+}
+
+/* SEARCH CUSTOMIZATION */
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Wrapper to keep icon inside input */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Search icon */
+.search-container i {
+    position: absolute;
+    left: 12px;  /* Adjust spacing */
+    font-size: 18px;
+    color: var(--gray);
+}
+
+/* Input field with padding for icon */
+.search-container input[type="text"] {
+    padding: 10px 16px 10px 40px; /* Extra left padding for icon */
+    font-size: 16px;
+    border: 2px solid var(--secondary);
+    border-radius: 25px;
+    outline: none;
+    background-color: var(--light);
+    color: var(--dark);
+    font-family: "Poppins", sans-serif;
+    width: 400px;
+    transition: all 0.3s ease;
+}
+
+/* Glowing effect on focus */
+.search-container input[type="text"]:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 10px rgba(79, 70, 229, 0.4);
+}
+
+/* TEXTS CUSTOMIZATION AT HOME PAGE */
+/* Minimalistic, smooth, and interactive tagline */
+.tagline {
+    color: var(--light);
+    text-align: center;
+    font-size: 60px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    opacity: 0;
+    animation: fadeInScale 1.2s ease-out forwards;
+    transition: transform 0.3s ease, letter-spacing 0.3s ease;
+}
+
+/* Fade-in with subtle scaling */
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Fun interactive hover effect */
+.tagline:hover {
+    transform: scale(1.05);
+    letter-spacing: 5px;
+}
+
+/* Neon Snaky Cursor Trail */
+.cursor-trail {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: white;
+    box-shadow: 0 0 12px white, 0 0 24px rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 1;
+    transition: transform 0.2s linear, opacity 0.4s ease-out;
+    z-index: 2; /* Ensure the cursor trail is above the background */
+}
+
+/*LOADING CSS*/
+/* Full-width loading bar */
+#nprogress .bar {
+    background: #4f46e5 !important; /* Customize color */
+    height: 4px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw !important; /* Full width */
+    z-index: 9999;
+}
+
+#nprogress .peg, #nprogress .spinner {
+    display: none; /* Remove extra effects */
+}
+
+/*Add Information Button*/
+.add-info button {
+    padding: 10px;
+    font-size: 14px;
+    background-color: var(--primary);
+    color: var(--light);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: auto;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-info button:hover {
+    background-color: #d3d3d3;
+    color: var(--dark)
+}
+
+/* POP-UP OVERLAY */
+.overlay {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(29, 26, 39, 0.8); /* Darker overlay */
+    backdrop-filter: blur(5px); /* Soft blur effect */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+/* Popup Box */
+.popup {
+    background: var(--dark); /* Dark mode container */
+    padding: 25px;
+    border-radius: 12px;
+    width: 380px;
+    text-align: center;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+    animation: fadeIn 0.3s ease-in-out;
+    border: 1px solid var(--secondary);
+    position: relative;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Form Inputs */
+.form .input {
+    width: 100%;
+    border: 1px solid var(--secondary);
+    border-radius: 8px;
+    padding: 10px;
+    background: var(--light);
+    font-size: 16px;
+    color: var(--dark);
+    transition: border 0.3s ease-in-out;
+}
+
+.form .input:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+/* Customized H2 */
+h2 {
+    font-size: 28px; /* Large and readable */
+    font-weight: bold;
+    color: var(--light); /* Light text for contrast */
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    display: inline-block;
+    position: relative;
+}
+
+/* Subtle Glow Effect */
+h2:hover {
+    text-shadow: 0 0 10px rgba(79, 70, 229, 0.6); /* Glow effect */
+}
+
+/* Form Labels */
+.form label {
+    color: var(--light);
+    font-size: 14px;
+    display: block;
+    text-align: left;
+    margin-bottom: 6px;
+}
+
+.input {
+    width: 100%; /* Makes input fields full width */
+    padding: 8px; /* Adds spacing inside input */
+    margin-bottom: 10px; /* Space between inputs */
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+/* Dropdown & Input Fields */
+.input, .role {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--secondary);
+    border-radius: 8px;
+    font-size: 16px;
+    background: var(--light);
+    color: var(--dark);
+}
+
+/* Buttons */
+.submit {
+    width: 110px;
+    padding: 12px;
+    margin: 10px 5px;
+    background-color: var(--primary);
+    color: var(--light);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.submit:hover {
+    background-color: #3e38c0;
+    transform: translateY(-2px);
+}
+
+/* Close Button */
+.close-btn {
+    width: 110px;
+    padding: 12px;
+    margin: 10px 5px;
+    background-color: #d32f2f;
+    color: var(--light);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.close-btn:hover {
+    background-color: #b71c1c;
+    transform: translateY(-2px);
+}
+
+/* HAMBURGER MENU CUSTOMIZATION */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+/* Sidebar styles */
+#sidebar {
+    display: flex;
+    flex-direction: column; /* Aligns elements vertically */
+    justify-content: space-between; /* Pushes the logout button to the bottom */
+    white-space: nowrap;
+    height: 100vh; /* Ensures sidebar takes full height */
+    width: 0;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    background-color: var(--primary);
+    overflow-y: auto; /* Allows scrolling only if needed */
+    transition: 0.3s ease;
+    padding-top: 60px;
+    box-shadow: 8px 10px 8px;
+}
+
+/* Sidebar links styling */
+#sidebar a {
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+}
+
+/* Hover effect */
+#sidebar a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#sidebar .close-btn {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    font-size: 36px;
+    color: white;
+}
+
+/* Sidebar links container (Home, Access Log, etc.) */
+#sidebar .sidebar-links {
+    flex-grow: 1; /* Takes up all available space */
+    display: flex;
+    flex-direction: column;
+}
+
+#sidebar .logout {
+    width: 100%;
+    text-align: left;
+    padding: 15px 20px;
+    display: block; /* Ensures it behaves like other links */
+}
+
+#sidebar a.logout {
+    padding: 15px 20px; /* Matches sidebar links */
+    font-size: 20px; /* Matches sidebar links */
+    display: block;
+    text-decoration: none;
+    color: #f1f1f1;
+    transition: 0.3s;
+}
+
+#sidebar a.logout:hover {
+    color: #f1f1f1;
+}
+
+@media screen and (max-width: 960px) {
+    #sidebar .close-btn {
+        margin-top: 10px;
+    }
+
+    #sidebar a {
+        color: var(--light);
+        margin-top: 15px;
+        font-size: 18px;
+    }
+
+    #sidebar a:hover {
+        background-color: var(--light);
+        color: var(--dark);
+    }
+
+    #sidebar .close-btn:hover {
+        background-color: #111;
+        color: var(--light);
+    }
+
+    input[type="text"] {
+        width: 150px;
+        height: 40px;
+    }
+
+    input[type="submit"] {
+        height: 40px;
+    }
+
+    .menu-toggle .bar {
+        display: block;
+        width: 25px;
+        height: 2px;
+        background-color: gray;
+        margin: 5px auto;
+        transition: 0.3s;
+    }
+
+    ul {
+        top: 150px;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        background-color: #d3d3d3;
+        display: none;
+    }
+
+    ul.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .dropdown-content {
+        width: 100%;
+    }
+
+    .bar {
+        margin-top: 20px;
+    }
+
+    .header {
+        flex-direction: column;
+    }
+
+    .tagline {
+        font-size: 50px;
+    }
+}
+
+@media (max-height: 1020px) and (max-width: 450px) {
+    table th {
+        font-size: 18px;
+    }
+
+    table {
+        font-size: 15px;
+    }
+
+    tr th {
+        padding: 12px;
+    }
+
+    tr td {
+        padding: 8px;
+    }
+
+    .tagline {
+        font-size: 40px;
+    }
+
+    #sidebar a {
+        color: var(--light);
+        margin-top: 15px;
+        font-size: 18px;
+    }
+
+    #sidebar .close-btn {
+        margin: none;
+    }
+
+    #sidebar a:hover {
+        background-color: var(--light);
+        color: var(--dark);
+    }
+
+    #sidebar .close-btn:hover {
+        background-color: #111;
+        color: var(--light);
+    }
+
+    #sidebar .logout {
+        margin-top: 305px;
+    }
+
+    #sidebar a.logout {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 18px;
+        color: #f1f1f1;
+        transition: 0.3s;
+    }
+
+    #sidebar a.logout:hover {
+        color: #f1f1f1;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .search-container {
+        max-width: 80%;
+    }
+
+    .search-container input[type="text"] {
+        font-size: 14px;
+        padding: 8px 14px 8px 35px;
+    }
+
+    .search-container i {
+        left: 10px;
+        font-size: 16px;
+    }
+}
+
+@media (max-height: 670px) and (max-width:380px) {
+    table th {
+        font-size: 18px;
+    }
+
+    table {
+        font-size: 15px;
+    }
+
+    tr th {
+        padding: 12px;
+    }
+
+    tr td {
+        padding: 7px;
+    }
+
+    .tagline {
+        font-size: 38px;
+    }
+
+    #sidebar .close-btn {
+        margin-top: 10px;
+    }
+
+    #sidebar a {
+        margin-right: 0px;
+        color: var(--light);
+        margin-top: 15px;
+        font-size: 18px;
+    }
+
+    #sidebar a:hover {
+        background-color: var(--light);
+        color: var(--dark);
+    }
+
+    #sidebar .close-btn:hover {
+        background-color: #111;
+        color: var(--light);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .search-form {
+        width: 70%;
+    }
+
+    .search-container {
+        max-width: 100%;
+    }
+
+    .search-container input[type="text"] {
+        font-size: 14px;
+        padding: 8px 14px 8px 35px;
+    }
+
+    .search-container i {
+        left: 8px;
+        font-size: 14px;
+    }
+}

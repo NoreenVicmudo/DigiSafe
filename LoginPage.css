@@ -1,0 +1,342 @@
+:root {
+    --primary: #4f46e5;
+    --secondary: #968ab6;
+    --light: #fbf8ff;
+    --dark: #1d1a27;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* General Styles */
+body {
+    width: 100%;
+    height: 100vh;
+    background: var(--dark);
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.custom-container {
+    animation: fadeIn 0.5s ease-in-out;
+    position: relative;
+    z-index: 2; /* Ensure the container is above the background */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Form */
+.form-container {
+    background: var(--light);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    max-width: 400px; /* Set max-width for form */
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 3; /* Ensure the form is above other elements */
+}
+
+/* Background design */
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(30, 30, 50, 0.8), var(--dark) 70%);
+    animation: pulseGlow 8s infinite alternate ease-in-out;
+    z-index: 1; /* Ensure the background is below other elements */
+}
+
+@keyframes pulseGlow {
+    0% { background: radial-gradient(circle at center, rgba(30, 30, 50, 0.6), var(--dark) 80%); }
+    100% { background: radial-gradient(circle at center, rgba(60, 60, 100, 0.8), var(--dark) 60%); }
+}
+
+/* Glowing Gradient Text */
+.title {
+    position: relative;
+    text-align: right;  /* Align text to the right */
+    padding: 0;
+    margin-top: 0;
+    width: 100%;
+}
+
+.title h1 {
+    font-size: 3rem; /* Increase the font size */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--light), var(--primary));
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: animateText 5s infinite linear;
+}
+
+@keyframes animateText {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Static White Short Description */
+.title p {
+    font-size: 1.2rem; /* Increase the font size */
+    color: var(--light);
+    margin-top: 10px;
+    text-shadow: none;
+    animation: fadeIn 3s ease-in-out;
+}
+
+/* Floating Glowing Lines */
+.glow-line {
+    position: absolute;
+    width: 150px;
+    height: 2px;
+    background: var(--primary);
+    box-shadow: 0 0 12px var(--primary);
+    opacity: 0.7;
+    animation: moveLines 6s linear infinite alternate;
+    z-index: 1; /* Ensure the glow lines are below the form */
+}
+
+@keyframes moveLines {
+    0% { transform: translateX(-50px) translateY(-20px); opacity: 0.6; }
+    100% { transform: translateX(50px) translateY(20px); opacity: 1; }
+}
+
+/* Neon Snaky Cursor Trail */
+.cursor-trail {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: white;
+    box-shadow: 0 0 12px white, 0 0 24px rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 1;
+    transition: transform 0.2s linear, opacity 0.4s ease-out;
+    z-index: 2; /* Ensure the cursor trail is above the background */
+}
+
+/****************************************************/
+
+.form-title {
+    margin-bottom: 20px;
+    color: var(--primary);
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.input-group.custom-input-group {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-group.custom-input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--secondary);
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    background: transparent;
+    color: var(--dark);
+    transition: all 0.3s ease-in-out;
+}
+
+.input-group.custom-input-group label {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: var(--secondary);
+    pointer-events: none;
+    transition: all 0.3s ease-in-out;
+    background: var(--light);
+    padding: 0 5px;
+}
+
+.input-group.custom-input-group input:focus,
+.input-group.custom-input-group input:not(:placeholder-shown) {
+    border-color: var(--primary);
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+}
+
+.input-group.custom-input-group input:focus + label,
+.input-group.custom-input-group input:not(:placeholder-shown) + label {
+    top: -8px;
+    font-size: 14px;
+    color: var(--primary);
+}
+
+.btn.custom-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: var(--light);
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+.btn.custom-btn:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: scale(1.03);
+}
+
+.message {
+    margin-top: 10px;
+    color: red;
+}
+
+.forgotpassword-link a {
+    text-decoration: none;
+    color: var(--primary);
+    font-size: 14px;
+}
+
+.forgotpassword-link a:hover {
+    color: var(--secondary);
+}
+
+/*LOADING CSS*/
+/* Full-width loading bar */
+#nprogress .bar {
+    background: #4f46e5 !important; /* Customize color */
+    height: 4px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw !important; /* Full width */
+    z-index: 9999;
+}
+
+#nprogress .peg, #nprogress .spinner {
+    display: none; /* Remove extra effects */
+}
+
+@media (max-width: 768px) {
+    .custom-container {
+        display: block;
+        padding: 20px;
+    }
+
+    .custom-row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+    }
+
+    .custom-col {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .form-container {
+        width: 100%;
+        max-width: 380px; /* Adjust max-width for smaller screens */
+        padding: 15px; /* Reduce padding slightly for small screens */
+    }
+
+    .form-title {
+        font-size: 18px; /* Adjust font size */
+    }
+
+    .input-group.custom-input-group input {
+        font-size: 14px; /* Smaller font size for inputs */
+        padding: 10px; /* Reduced padding for smaller screens */
+    }
+
+    .btn.custom-btn {
+        padding: 10px; /* Reduced padding for the button */
+        font-size: 14px; /* Smaller font size for buttons */
+    }
+
+    .message {
+        font-size: 12px; /* Smaller font size for error message */
+    }
+
+    .forgotpassword-link a {
+        font-size: 12px; /* Adjust font size for smaller screens */
+    }
+}
+
+@media (max-width: 450px) {
+    .form-container {
+        max-width: 340px; /* Adjust max-width further for 450px screens */
+    }
+
+    .title h1 {
+        font-size: 2rem; /* Slightly smaller font size for very small screens */
+    }
+
+    .title p {
+        font-size: 1rem; /* Adjusted for smaller screens */
+    }
+
+    .btn.custom-btn {
+        font-size: 14px; /* Smaller font size for the button */
+    }
+
+    .forgotpassword-link a {
+        font-size: 12px; /* Adjust font size further for very small screens */
+    }
+}
+
+@media (max-width: 380px) {
+    .form-container {
+        max-width: 320px; /* Further reduce the max-width for 380px screens */
+    }
+
+    .title h1 {
+        font-size: 1.8rem; /* Reduce font size even more for very small screens */
+    }
+
+    .title p {
+        font-size: 0.9rem; /* Slightly smaller font for readability */
+    }
+
+    .btn.custom-btn {
+        padding: 8px; /* Reduce padding on the button */
+        font-size: 12px; /* Make button font size even smaller */
+    }
+
+    .forgotpassword-link a {
+        font-size: 10px; /* Adjust font size for readability */
+    }
+
+    .message {
+        font-size: 10px; /* Small message font size */
+    }
+}
+
+
+
