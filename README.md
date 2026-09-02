@@ -15,7 +15,7 @@ Users have access to:
 * FAQs so users can view if they have inquiries about the system that may have been already answered by the developers.
 * Change Password and Forgot Password allows users to change their account password.
 
-**Front-End Video Showcase:** [https://youtu.be/ebzfy5gTnr8](https://youtu.be/ebzfy5gTnr8)
+**Front-End Video Showcase:** https://youtu.be/eEtzFy5g7n8
 
 ---
 
@@ -28,6 +28,6 @@ Admins have access to:
 * QR Code Generation Logs of users.
 * Support to view the users' concerns.
 
-**Front-End Video Showcase:** [https://youtu.be/lZXB1l_EXog](https://youtu.be/lZXB1l_EXog)
+**Front-End Video Showcase:** https://youtu.be/LzKB1l_EXog
 
 **Manual:** https://drive.google.com/drive/folders/1rPSk119tnD5v8GYLQrvM3o7Vi5wWZ9Jq?usp=sharing
